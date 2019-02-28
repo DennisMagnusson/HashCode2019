@@ -31,13 +31,14 @@ public class Brain {
     int tempImprove = -1;
     while (allSlides.size() != 0) {
       tempSlide = allSlides.remove(0);
+      System.out.println(outputOrder.size());
 
       bestInsert = -1;
       bestImprove = -1;
       for (int i = 0; i < 1000; i++) {
         int insertIndex = rng.nextInt(outputOrder.size() + 1);
 
-        if (insertIndex != 0) {
+        if (insertIndex == 0) {
           // insert at start
           tempImprove = getScore(tempSlide, outputOrder.get(0));
         }
@@ -47,10 +48,10 @@ public class Brain {
         }
         else {
           // insert somewhere in middle
-
-          tempImprove = getScore(tempSlide, outputOrder.get(insertIndex-1))
-          + getScore(tempSlide, outputOrder.get(insertIndex))
-          -getScore(outputOrder.get(insertIndex), outputOrder.get(insertIndex-1));
+          //System.out.println(insertIndex + " " + outputOrder.size());
+          tempImprove = getScore(tempSlide, outputOrder.get(insertIndex-1));
+          tempImprove += getScore(tempSlide, outputOrder.get(insertIndex));
+          tempImprove -= getScore(outputOrder.get(insertIndex), outputOrder.get(insertIndex-1));
         }
 
         if (tempImprove > bestImprove) {

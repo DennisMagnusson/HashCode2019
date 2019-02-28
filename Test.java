@@ -59,10 +59,13 @@ public class Test {
     for(int i = 0; i < v.size(); i++) {
      verticalPhotos[i] = v.get(i); 
     }
-
+    
+    brain.horizontalSlides = h;
     brain.verticalPhotos = verticalPhotos;
     brain.fillCombSlides();
-    for(Photo p : brain.combSlides) arr.add(p);
+    brain.putStuffInAllSlides();
+    brain.orderSlides();
+    for(Photo p : brain.outputOrder) arr.add(p);
     //*******************************************//
     //Fix verticals
     /*
