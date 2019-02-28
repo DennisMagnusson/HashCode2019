@@ -80,6 +80,7 @@ public class Brain {
         bestInsert = 0;
       }
     }
+    totalImprove += tempImprove;
     outputOrder.add(bestInsert, tempSlide);
   }
 
