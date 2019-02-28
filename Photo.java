@@ -7,7 +7,7 @@ public class Photo implements Comparable<Photo> {
   public int id2 = -1;
 
   public boolean isVertical; // true if vertical
-  public ArrayList<String> tags = new ArrayList<>();
+  public HashSet<String> tags = new HashSet<>();
 
 
   public int compareTo(Photo other) {

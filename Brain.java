@@ -4,6 +4,16 @@ public class Brain {
 
   public Photo[] verticalPhotos;
   public ArrayList<Photo> combSlides = new ArrayList<>();
+  public ArrayList<Photo> allSlides = new ArrayList<>();
+
+
+  public void putStuffInAllSlides() {
+
+  }
+
+  public void orderSlides() {
+
+  }
 
 
   public void fillCombSlides() {
@@ -43,16 +53,14 @@ public class Brain {
 
 
   public int getSimilar(Photo photo1, Photo photo2) {
-    HashSet<String> inPhoto1 = new HashSet<>();
-    for (int i = 0; i < photo1.tags.size(); i++) {
-      inPhoto1.add(photo1.tags.get(i));
-    }
-
     int same = 0;
     int different = photo1.tags.size() + photo2.tags.size();
 
-    for (int i = 0; i < photo2.tags.size(); i++) {
-      if (inPhoto1.contains(photo2.tags.get(i))) {
+    Iterator iterator = photo2.tags.iterator();
+
+    while (iterator.hasNext()) {
+      Photo temp = (Photo)iterator.next();
+      if (photo1.tags.contains(temp)) {
         same++;
         different -= 2;
       }
@@ -64,16 +72,14 @@ public class Brain {
 
 
   public int getScore(Photo photo1, Photo photo2) {
-    HashSet<String> inPhoto1 = new HashSet<>();
-    for (int i = 0; i < photo1.tags.size(); i++) {
-      inPhoto1.add(photo1.tags.get(i));
-    }
-
     int same = 0;
     int different = photo1.tags.size() + photo2.tags.size();
 
-    for (int i = 0; i < photo2.tags.size(); i++) {
-      if (inPhoto1.contains(photo2.tags.get(i))) {
+    Iterator iterator = photo2.tags.iterator();
+
+    while (iterator.hasNext()) {
+      Photo temp = (Photo)iterator.next();
+      if (photo1.tags.contains(temp)) {
         same++;
         different -= 2;
       }
