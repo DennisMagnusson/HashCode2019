@@ -9,12 +9,76 @@ public class Brain {
   public ArrayList<Photo> allSlides = new ArrayList<>();
   public ArrayList<Photo> outputOrder = new ArrayList<>();
 
+  public Random rng = new Random();
+  public int totalImprove = 0;
+
   public void putStuffInAllSlides() {
     for (int i = 0; i < horizontalSlides.size(); i++) {
       allSlides.add(horizontalSlides.get(i));
     }
     for (int i = 0; i < combSlides.size(); i++) {
       allSlides.add(combSlides.get(i));
+    }
+  }
+
+  public void improve() {
+    Photo tempSlide = null;
+    int bestInsert = -1;
+    int bestImprove = -1;
+    int tempImprove = -1;
+
+    System.out.println("total improvement = " + totalImprove);
+
+    int removeIndex = rng.nextInt(outputOrder.size());
+    if (removeIndex == 0) {
+      // insert at start
+      totalImprove -= getScore(outputOrder.get(0), outputOrder.get(1));
+    }
+    else if (removeIndex == outputOrder.size() - 1) {
+      // insert at end
+      totalImprove -= getScore(outputOrder.get(outputOrder.size() - 1), outputOrder.get(outputOrder.size() - 2));
+    }
+    else {
+      // insert somewhere in middle
+      //System.out.println(insertIndex + " " + outputOrder.size());
+      totalImprove -= getScore(outputOrder.get(removeIndex), outputOrder.get(removeIndex-1));
+      totalImprove -= getScore(outputOrder.get(removeIndex), outputOrder.get(removeIndex+1));
+      totalImprove += getScore(outputOrder.get(removeIndex-1), outputOrder.get(removeIndex+1));
+    }
+
+    tempSlide = outputOrder.remove(removeIndex);
+
+    bestInsert = -1;
+    bestImprove = -1;
+    for (int i = 0; i <= outputOrder.size(); i++) {
+      //int insertIndex = rng.nextInt(outputOrder.size() + 1);
+      int insertIndex = i;
+
+      if (insertIndex == 0) {
+        // insert at start
+        tempImprove = getScore(tempSlide, outputOrder.get(0));
+      }
+      else if (insertIndex == outputOrder.size()) {
+        // insert at end
+        tempImprove = getScore(tempSlide, outputOrder.get(outputOrder.size()-1));
+      }
+      else {
+        // insert somewhere in middle
+        //System.out.println(insertIndex + " " + outputOrder.size());
+        tempImprove = getScore(tempSlide, outputOrder.get(insertIndex-1));
+        tempImprove += getScore(tempSlide, outputOrder.get(insertIndex));
+        tempImprove -= getScore(outputOrder.get(insertIndex), outputOrder.get(insertIndex-1));
+      }
+
+      if (tempImprove > bestImprove) {
+        bestImprove = tempImprove;
+        bestInsert = insertIndex;
+      }
+
+      if(bestInsert == -1) {
+        bestInsert = 0;
+      }
+      outputOrder.add(bestInsert, tempSlide);
     }
   }
 
@@ -60,7 +124,7 @@ public class Brain {
           bestInsert = insertIndex;
         }
       }
-      
+
       if(bestInsert == -1) bestInsert = 0;
       outputOrder.add(bestInsert, tempSlide);
     }
