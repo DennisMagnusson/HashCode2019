@@ -97,7 +97,7 @@ public class Test2 {
     for(int i = 0; ; i++) {
       brain.improve();
       System.out.println("ì=" + i);
-      if(i%5000 == 0) {
+      if(i%500 == 0) {
         try {
           writeToFile(brain.outputOrder, args[0]+i+".out");
         } catch(Exception e) {};
