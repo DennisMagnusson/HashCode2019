@@ -21,13 +21,3 @@ public class Photo implements Comparable<Photo> {
   }
 }
 
-
-
-static void writeToFile()throws Exception {
-    BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\tobia\\Desktop\\KaggleChristmas2018\\out.txt"));
-    writer.write("Path\n");
-    for (int i = 0; i < orderOfVisits.size(); i++) {
-      writer.write(orderOfVisits.get(i) + "\n");
-    }
-    writer.close();
-  }
