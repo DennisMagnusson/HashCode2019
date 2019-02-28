@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Photo Comparable<Photo> {
+public class Photo implements Comparable<Photo> {
 
   // ids are only valid if they don't equal -1
   public int id1 = -1;

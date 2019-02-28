@@ -2,11 +2,63 @@ import java.util.*;
 
 public class Brain {
 
-  public Photo[] photos;
+  public Photo[] verticalPhotos;
+  public ArrayList<Photo> combSlides = new ArrayList<>();
 
 
-  public void doStuff() {
-    Arrays.sort(photos);
+  public void fillCombSlides() {
+    Arrays.sort(verticalPhotos);
+
+    int indexWithBestPairing = -1;
+    int lowestSimilar = Integer.MAX_VALUE;
+    int temp;
+    boolean[] usedUp = new boolean[verticalPhotos.length];
+    for (int i = verticalPhotos.length - 1; i >= 1; i--) {
+      if (usedUp[i]) {
+        continue;
+      }
+      indexWithBestPairing = -1;
+      for (int j = 0; j < verticalPhotos.length; j++) {
+        if (i == j || usedUp[j]) {
+          continue;
+        }
+        temp = getSimilar(verticalPhotos[i], verticalPhotos[j]);
+        if (temp < lowestSimilar || indexWithBestPairing == -1) {
+          indexWithBestPairing = j;
+          lowestSimilar = temp;
+        }
+      }
+      if (indexWithBestPairing == -1) {
+        break;
+      }
+      usedUp[i] = true;
+      usedUp[indexWithBestPairing] = true;
+      Photo newPhoto = new Photo();
+      newPhoto.id1 = verticalPhotos[i].id1;
+      newPhoto.id2 = verticalPhotos[indexWithBestPairing].id1;
+      newPhoto.isVertical = false;
+      combSlides.add(newPhoto);
+    }
+  }
+
+
+  public int getSimilar(Photo photo1, Photo photo2) {
+    HashSet<String> inPhoto1 = new HashSet<>();
+    for (int i = 0; i < photo1.tags.size(); i++) {
+      inPhoto1.add(photo1.tags.get(i));
+    }
+
+    int same = 0;
+    int different = photo1.tags.size() + photo2.tags.size();
+
+    for (int i = 0; i < photo2.tags.size(); i++) {
+      if (inPhoto1.contains(photo2.tags.get(i))) {
+        same++;
+        different -= 2;
+      }
+    }
+
+    return same;
   }
 
 
