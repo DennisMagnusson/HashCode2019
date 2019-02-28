@@ -74,25 +74,25 @@ public class Test {
       arr.add(v.get(i));
     }
     */
-
+    /*
     System.out.println(arr.size());
     for(Photo p : arr) {
       if(p.id2 == -1) System.out.println(p.id1);
       else System.out.println(p.id1 + " " + p.id2);
     }
+    */
+    writeToFile(arr, args[0]);
 
   }
 
-  //DELET THIS?
-  public static void writeToFile(ArrayList<Integer>[] a) {
-    int q = 1;
-    for(ArrayList<Integer> k: a) {
-      System.out.print(k.size());
-      for(int i : k) {
-        System.out.print(" "+i);
-      }
-      q++;
-      System.out.println();
+  public static void writeToFile(ArrayList<Photo> arr, String filename) {
+    PrintWriter pw = new PrintWriter(filename + ".out", "UTF-8");
+    pw.println(arr.size());
+    for(Photo p : arr) {
+      if(p.id2 == -1) pw.println(p.id1);
+      else pw.println(p.id1 + " " + p.id2);
     }
+    pw.close();
   }
+
 }
