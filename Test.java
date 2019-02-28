@@ -23,30 +23,33 @@ public class Test {
     } catch(Exception e) {}
     
     int nPhotos = Integer.parseInt(lines.remove(0));
-    Photo[] photos = new Photos[nPhotos];
+    Photo[] photos = new Photo[nPhotos];
     int z = 0;
     for(String line : lines) {
       String[] things = line.split(" ");
-      boolean horizontal = things[0] == 'H';
+      boolean horizontal = (things[0].equals("H"));
       int i = Integer.parseInt(things[1]);
-      ArrayList<Strings> tags = new ArrayList<>();
-      for(int u = 0; u < i; i++) {
-        tags.add(things[i+2]);
+      ArrayList<String> tags = new ArrayList<>();
+      for(int u = 2; u < things.length; u++) {
+        tags.add(things[u]);
       }
-      photos[z] = new Photo(horizontal, tags, z);
+      photos[z] = new Photo();
+      photos[z].id1 = z;
+      photos[z].isVertical = !horizontal;
+      photos[z].tags = tags;
+
       z++;
     }
 
-    /*
-    ArrayList<Photo> arr = new ArrayList<>();
+    ArrayList<Photo> arr = new ArrayList<>();//READ THIS FROM SOMEWHERE
+    for(Photo p : photos) {
+      if(!p.isVertical) arr.add(p);
+    }
     System.out.println(arr.size());
-    for(Photo i : arr) {
-
+    for(Photo p : arr) {
+      if(p.id2 == -1) System.out.println(p.id1);
+      else System.out.println(p.id1 + " " + p.id2);
     }
-    for(int i = 0; i < arr.size(); i++) {
-      
-    }
-    */
 
   }
 
