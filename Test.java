@@ -41,10 +41,27 @@ public class Test {
       z++;
     }
 
-    ArrayList<Photo> arr = new ArrayList<>();//READ THIS FROM SOMEWHERE
+    ArrayList<Photo> h = new ArrayList<>();//READ THIS FROM SOMEWHERE
+    ArrayList<Photo> v = new ArrayList<>();//READ THIS FROM SOMEWHERE
+    ArrayList<Photo> arr = new ArrayList<>();//XXX Get this from Brain
+
     for(Photo p : photos) {
-      if(!p.isVertical) arr.add(p);
+      if(!p.isVertical) {
+        h.add(p);
+        //arr.add(p);
+      }
+      else v.add(p);
     }
+    
+    //*******************************************//
+    //Fix verticals
+    /*
+    for(int i = 1; i < v.size(); i += 2) {
+      v.get(i).id2 = v.get(i-1).id1;
+      arr.add(v.get(i));
+    }
+    */
+
     System.out.println(arr.size());
     for(Photo p : arr) {
       if(p.id2 == -1) System.out.println(p.id1);
