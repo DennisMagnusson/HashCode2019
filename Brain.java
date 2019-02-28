@@ -59,7 +59,7 @@ public class Brain {
     Iterator iterator = photo2.tags.iterator();
 
     while (iterator.hasNext()) {
-      Photo temp = (Photo)iterator.next();
+      String temp = (String)iterator.next();
       if (photo1.tags.contains(temp)) {
         same++;
         different -= 2;
@@ -78,7 +78,7 @@ public class Brain {
     Iterator iterator = photo2.tags.iterator();
 
     while (iterator.hasNext()) {
-      Photo temp = (Photo)iterator.next();
+      String temp = (String)iterator.next();
       if (photo1.tags.contains(temp)) {
         same++;
         different -= 2;
