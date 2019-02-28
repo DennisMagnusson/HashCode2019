@@ -28,7 +28,7 @@ public class Brain {
         continue;
       }
       indexWithBestPairing = -1;
-      for (int j = 0; j < verticalPhotos.length; j++) {
+      for (int j = 0; j < i; j++) {
         if (i == j || usedUp[j]) {
           continue;
         }
@@ -54,21 +54,12 @@ public class Brain {
 
   public int getSimilar(Photo photo1, Photo photo2) {
     int same = 0;
-    if (same == 0) {
-      HashSet<String> newSet = new HashSet<>();
-      newSet.addAll(photo1.tags);
-      newSet.addAll(photo2.tags);
-      return newSet.size();
-    }
-    int different = photo1.tags.size() + photo2.tags.size();
-
     Iterator iterator = photo2.tags.iterator();
 
     while (iterator.hasNext()) {
       String temp = (String)iterator.next();
       if (photo1.tags.contains(temp)) {
         same++;
-        different -= 2;
       }
     }
 
@@ -79,12 +70,6 @@ public class Brain {
 
   public int getScore(Photo photo1, Photo photo2) {
     int same = 0;
-    if (same == 0) {
-      HashSet<String> newSet = new HashSet<>();
-      newSet.addAll(photo1.tags);
-      newSet.addAll(photo2.tags);
-      return newSet.size();
-    }
     int different = photo1.tags.size() + photo2.tags.size();
 
     Iterator iterator = photo2.tags.iterator();
