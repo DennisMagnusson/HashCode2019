@@ -19,16 +19,20 @@ public class Brain {
   public void fillCombSlides() {
     Arrays.sort(verticalPhotos);
 
+    Random rng = new Random();
+
     int indexWithBestPairing = -1;
     int lowestSimilar = Integer.MAX_VALUE;
     int temp;
     boolean[] usedUp = new boolean[verticalPhotos.length];
     for (int i = verticalPhotos.length - 1; i >= 1; i--) {
+      System.out.println(i);
       if (usedUp[i]) {
         continue;
       }
       indexWithBestPairing = -1;
-      for (int j = 0; j < i; j++) {
+      for (int k = 0; k < 1000; k++) {
+        int j = rng.nextInt(i);
         if (usedUp[j]) {
           continue;
         }
@@ -57,7 +61,7 @@ public class Brain {
     Iterator iterator = photo2.tags.iterator();
 
     while (iterator.hasNext()) {
-      String temp = (String)iterator.next();
+      int temp = (int)iterator.next();
       if (photo1.tags.contains(temp)) {
         same++;
       }
@@ -75,7 +79,7 @@ public class Brain {
     Iterator iterator = photo2.tags.iterator();
 
     while (iterator.hasNext()) {
-      String temp = (String)iterator.next();
+      int temp = (int)iterator.next();
       if (photo1.tags.contains(temp)) {
         same++;
         different -= 2;
