@@ -31,12 +31,13 @@ public class Brain {
     int tempImprove = -1;
     while (allSlides.size() != 0) {
       tempSlide = allSlides.remove(0);
-      System.out.println(outputOrder.size());
+      System.out.println(allSlides.size());
 
       bestInsert = -1;
       bestImprove = -1;
-      for (int i = 0; i < 1000; i++) {
-        int insertIndex = rng.nextInt(outputOrder.size() + 1);
+      for (int i = 0; i <= outputOrder.size(); i++) {
+        //int insertIndex = rng.nextInt(outputOrder.size() + 1);
+        int insertIndex = i;
 
         if (insertIndex == 0) {
           // insert at start
@@ -59,7 +60,8 @@ public class Brain {
           bestInsert = insertIndex;
         }
       }
-
+      
+      if(bestInsert == -1) bestInsert = 0;
       outputOrder.add(bestInsert, tempSlide);
     }
   }
@@ -118,7 +120,6 @@ public class Brain {
 
     return same;
   }
-
 
 
   public int getScore(Photo photo1, Photo photo2) {
