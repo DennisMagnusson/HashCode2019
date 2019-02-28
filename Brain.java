@@ -54,6 +54,12 @@ public class Brain {
 
   public int getSimilar(Photo photo1, Photo photo2) {
     int same = 0;
+    if (same == 0) {
+      HashSet<String> newSet = new HashSet<>();
+      newSet.addAll(photo1.tags);
+      newSet.addAll(photo2.tags);
+      return newSet.size();
+    }
     int different = photo1.tags.size() + photo2.tags.size();
 
     Iterator iterator = photo2.tags.iterator();
@@ -73,6 +79,12 @@ public class Brain {
 
   public int getScore(Photo photo1, Photo photo2) {
     int same = 0;
+    if (same == 0) {
+      HashSet<String> newSet = new HashSet<>();
+      newSet.addAll(photo1.tags);
+      newSet.addAll(photo2.tags);
+      return newSet.size();
+    }
     int different = photo1.tags.size() + photo2.tags.size();
 
     Iterator iterator = photo2.tags.iterator();
