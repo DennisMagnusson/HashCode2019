@@ -29,7 +29,7 @@ public class Brain {
       }
       indexWithBestPairing = -1;
       for (int j = 0; j < i; j++) {
-        if (i == j || usedUp[j]) {
+        if (usedUp[j]) {
           continue;
         }
         temp = getSimilar(verticalPhotos[i], verticalPhotos[j]);

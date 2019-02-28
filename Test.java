@@ -29,9 +29,9 @@ public class Test {
       String[] things = line.split(" ");
       boolean horizontal = (things[0].equals("H"));
       int i = Integer.parseInt(things[1]);
-      HashSet<String> tags = new HashSet<>();
+      HashSet<Integer> tags = new HashSet<>();
       for(int u = 2; u < things.length; u++) {
-        tags.add(things[u]);
+        tags.add(things[u].hashCode());
       }
       photos[z] = new Photo();
       photos[z].id1 = z;
