@@ -30,7 +30,7 @@ public class Test {
       boolean horizontal = (things[0] == "H");
       int i = Integer.parseInt(things[1]);
       ArrayList<String> tags = new ArrayList<>();
-      for(int u = 0; u < i; i++) {
+      for(int u = 0; u < i-3; i++) {
         tags.add(things[i+2]);
       }
       photos[z] = new Photo();
