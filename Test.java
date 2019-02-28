@@ -27,7 +27,7 @@ public class Test {
     int z = 0;
     for(String line : lines) {
       String[] things = line.split(" ");
-      boolean horizontal = things[0] == 'H';
+      boolean horizontal = (things[0] == "H");
       int i = Integer.parseInt(things[1]);
       ArrayList<Strings> tags = new ArrayList<>();
       for(int u = 0; u < i; i++) {
@@ -37,16 +37,12 @@ public class Test {
       z++;
     }
 
-    /*
     ArrayList<Photo> arr = new ArrayList<>();
     System.out.println(arr.size());
-    for(Photo i : arr) {
-
+    for(Photo p : arr) {
+      if(p.id2 == -1) System.out.println(p.id1);
+      else System.out.println(p.id1 + " " + p.id2);
     }
-    for(int i = 0; i < arr.size(); i++) {
-      
-    }
-    */
 
   }
 
