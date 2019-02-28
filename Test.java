@@ -50,7 +50,7 @@ public class Test {
     for(Photo p : photos) {
       if(!p.isVertical) {
         h.add(p);
-        arr.add(p);//XXX DELET THIS
+        //arr.add(p);//XXX DELET THIS
       }
       else v.add(p);
     }
@@ -81,18 +81,21 @@ public class Test {
       else System.out.println(p.id1 + " " + p.id2);
     }
     */
-    writeToFile(arr, args[0]);
+    try {
+    writeToFile(arr, args[0]+".out");
+    } catch(Exception e) {};
 
   }
 
-  public static void writeToFile(ArrayList<Photo> arr, String filename) {
-    PrintWriter pw = new PrintWriter(filename + ".out", "UTF-8");
-    pw.println(arr.size());
+  static void writeToFile(ArrayList<Photo> arr, String filename)throws Exception {
+    BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
+    writer.write(arr.size()+"\n");
     for(Photo p : arr) {
-      if(p.id2 == -1) pw.println(p.id1);
-      else pw.println(p.id1 + " " + p.id2);
+      if(p.id2 == -1) writer.write(p.id1+"\n");
+      else writer.write(p.id1 + " " + p.id2 + "\n");
     }
-    pw.close();
+    writer.close();
   }
+
 
 }
