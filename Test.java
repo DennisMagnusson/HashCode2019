@@ -29,7 +29,7 @@ public class Test {
       String[] things = line.split(" ");
       boolean horizontal = (things[0].equals("H"));
       int i = Integer.parseInt(things[1]);
-      ArrayList<String> tags = new ArrayList<>();
+      HashSet<String> tags = new HashSet<>();
       for(int u = 2; u < things.length; u++) {
         tags.add(things[u]);
       }
@@ -43,16 +43,26 @@ public class Test {
 
     ArrayList<Photo> h = new ArrayList<>();//READ THIS FROM SOMEWHERE
     ArrayList<Photo> v = new ArrayList<>();//READ THIS FROM SOMEWHERE
+
+    Brain brain = new Brain();
     ArrayList<Photo> arr = new ArrayList<>();//XXX Get this from Brain
 
     for(Photo p : photos) {
       if(!p.isVertical) {
         h.add(p);
-        //arr.add(p);
+        arr.add(p);//XXX DELET THIS
       }
       else v.add(p);
     }
-    
+    //Convert to array
+    Photo[] verticalPhotos = new Photo[v.size()];
+    for(int i = 0; i < v.size(); i++) {
+     verticalPhotos[i] = v.get(i); 
+    }
+
+    brain.verticalPhotos = verticalPhotos;
+    brain.fillCombSlides();
+    for(Photo p : brain.combSlides) arr.add(p);
     //*******************************************//
     //Fix verticals
     /*
