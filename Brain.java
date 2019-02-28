@@ -2,7 +2,16 @@ import java.util.*;
 
 public class Brain {
 
-  public static int getScore(Photo photo1, Photo photo2) {
+  public Photo[] photos;
+
+
+  public void doStuff() {
+    Arrays.sort(photos);
+  }
+
+
+
+  public int getScore(Photo photo1, Photo photo2) {
     HashSet<String> inPhoto1 = new HashSet<>();
     for (int i = 0; i < photo1.size(); i++) {
       inPhoto1.add(photo1.get(i));
