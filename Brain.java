@@ -50,10 +50,10 @@ public class Brain {
 
     bestInsert = -1;
     bestImprove = -1;
-    for (int i = 0; i <= outputOrder.size(); i++) {
+    for (int i = 0; i <= 1000; i++) {
       //System.out.println(i);
-      //int insertIndex = rng.nextInt(outputOrder.size() + 1);
-      int insertIndex = i;
+      int insertIndex = rng.nextInt(outputOrder.size() + 1);
+      //int insertIndex = i;
 
       if (insertIndex == 0) {
         // insert at start
