@@ -27,11 +27,11 @@ public class Test {
     int z = 0;
     for(String line : lines) {
       String[] things = line.split(" ");
-      boolean horizontal = (things[0] == "H");
+      boolean horizontal = (things[0].equals("H"));
       int i = Integer.parseInt(things[1]);
       ArrayList<String> tags = new ArrayList<>();
-      for(int u = 0; u < i-3; i++) {
-        tags.add(things[i+2]);
+      for(int u = 2; u < things.length; u++) {
+        tags.add(things[u]);
       }
       photos[z] = new Photo();
       photos[z].id1 = z;
@@ -42,6 +42,9 @@ public class Test {
     }
 
     ArrayList<Photo> arr = new ArrayList<>();//READ THIS FROM SOMEWHERE
+    for(Photo p : photos) {
+      if(!p.isVertical) arr.add(p);
+    }
     System.out.println(arr.size());
     for(Photo p : arr) {
       if(p.id2 == -1) System.out.println(p.id1);
