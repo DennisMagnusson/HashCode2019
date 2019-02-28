@@ -4,15 +4,63 @@ public class Brain {
 
   public Photo[] verticalPhotos;
   public ArrayList<Photo> combSlides = new ArrayList<>();
-  public ArrayList<Photo> allSlides = new ArrayList<>();
+  public ArrayList<Photo> horizontalSlides = new ArrayList<>();
 
+  public ArrayList<Photo> allSlides = new ArrayList<>();
+  public ArrayList<Photo> outputOrder = new ArrayList<>();
 
   public void putStuffInAllSlides() {
-
+    for (int i = 0; i < horizontalSlides.size(); i++) {
+      allSlides.add(horizontalSlides.get(i));
+    }
+    for (int i = 0; i < combSlides.size(); i++) {
+      allSlides.add(combSlides.get(i));
+    }
   }
 
   public void orderSlides() {
+    // add 2 slides
+    outputOrder.add(allSlides.remove(0));
+    outputOrder.add(allSlides.remove(0));
 
+    Random rng = new Random();
+
+    Photo tempSlide = null;
+    int bestInsert = -1;
+    int bestImprove = -1;
+    int tempImprove = -1;
+    while (allSlides.size() != 0) {
+      tempSlide = allSlides.remove(0);
+
+      bestInsert = -1;
+      bestImprove = -1;
+      for (int i = 0; i < 1000; i++) {
+        int insertIndex = rng.nextInt(outputOrder.size() + 1);
+
+        if (insertIndex != 0) {
+          // insert at start
+          tempImprove = getScore(tempSlide, outputOrder.get(0));
+        }
+        else if (insertIndex == outputOrder.size()) {
+          // insert at end
+          tempImprove = getScore(tempSlide, outputOrder.get(outputOrder.size()-1));
+        }
+        else {
+          // insert somewhere in middle
+
+          tempImprove = getScore(tempSlide, outputOrder.get(insertIndex-1))
+          + getScore(tempSlide, outputOrder.get(insertIndex))
+          -getScore(outputOrder.get(insertIndex), outputOrder.get(insertIndex-1));
+        }
+
+        if (tempImprove > bestImprove) {
+          bestImprove = tempImprove;
+          bestInsert = insertIndex;
+        }
+      }
+
+      outputOrder.add(bestInsert, tempSlide);
+    }
   }
 
 
